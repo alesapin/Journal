@@ -1,0 +1,29 @@
+<%= form_for(@miss) do |f| %>
+  <% if @miss.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@miss.errors.count, "error") %> prohibited this miss from being saved:</h2>
+
+      <ul>
+      <% @miss.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :student %><br>
+    <%= f.text_field :student %>
+  </div>
+  <div class="field">
+    <%= f.label :pair %><br>
+    <%= f.text_field :pair %>
+  </div>
+  <div class="field">
+    <%= f.label :hours %><br>
+    <%= f.number_field :hours %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

@@ -1,0 +1,39 @@
+<%= form_for(@pair) do |f| %>
+  <% if @pair.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@pair.errors.count, "error") %> prohibited this pair from being saved:</h2>
+
+      <ul>
+      <% @pair.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <p><strong>Создается пара по предмету <%=@subj.title%> для группы <%=@group.name%> </strong> </p>
+  <ul>
+	<% @group.students.each do |student| %>
+		<li><%= student.name %> </li>
+	<% end %>
+  </ul>
+  <table>
+	<% @group.students.each do |student| %>
+	<%= fields_for :miss do |fm| %>
+	<tr>
+		<td><%= student.name %> </td>
+		<td><%= fm.text_field "hours[#{student.id}]" %> </td>
+	</tr>
+	<% end %>
+	<% end %>
+  </table>
+  <div class="field">
+    <%= f.label :today %><br>
+    <%= f.date_select :today %>
+  </div>
+  <%= f.hidden_field :subject_id,:value => @subj.id %>
+  <%= f.hidden_field :group_id, :value =>  @group.id %>
+  <div class="actions">
+    <%= f.submit 'OK' %>
+  </div>
+<% end %>

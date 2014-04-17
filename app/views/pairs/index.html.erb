@@ -1,0 +1,31 @@
+<h1>Listing pairs</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Subject</th>
+	  <th>Group</th>
+      <th>Today</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @pairs.each do |pair| %>
+      <tr>
+        <td><%= pair.subject.title %></td>
+		<td><%= pair.group.name %></td>
+        <td><%= pair.today %></td>
+        <td><%= link_to 'Show', pair %></td>
+        <td><%= link_to 'Edit', edit_pair_path(pair) %></td>
+        <td><%= link_to 'Destroy', pair, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Pair', new_pair_path %>

@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Student:</strong>
+  <%= @miss.student %>
+</p>
+
+<p>
+  <strong>Pair:</strong>
+  <%= @miss.pair %>
+</p>
+
+<p>
+  <strong>Hours:</strong>
+  <%= @miss.hours %>
+</p>
+
+<%= link_to 'Edit', edit_miss_path(@miss) %> |
+<%= link_to 'Back', misses_path %>

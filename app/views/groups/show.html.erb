@@ -1,0 +1,30 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @group.name %>
+</p>
+
+<p>
+  <strong>Course:</strong>
+  <%= @group.course %>
+</p>
+
+<p>
+  <strong>Number of students:</strong>
+  <%= @group.number_of_students %>
+</p>
+<p><strong>Subjects:</strong></p>
+<ul>	
+	<% @group.subjects.each do |subj| %>
+		<li><%= subj.title %> </li>
+	<% end %>
+</ul>
+<p><strong>Students:</strong></p>
+<ul>
+	<% Student.where(group: @group).each do |student| %>
+		<li><%= student.name %> <%= student.surname%></li>
+	<% end %>
+</ul>
+<%= link_to 'Edit', edit_group_path(@group) %> |
+<%= link_to 'Back', groups_path %>

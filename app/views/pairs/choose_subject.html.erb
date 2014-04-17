@@ -1,0 +1,6 @@
+<p><strong>Предметы:</strong></p>
+<ul>
+	<% @subjects.each do |sbj| %>
+		<li><%=link_to sbj.title, :controller => "pairs",:action => "choose_group", :subject_id => sbj %> </li>
+	<%end%>
+</ul>

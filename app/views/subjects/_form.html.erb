@@ -1,0 +1,33 @@
+<%= form_for(@subject) do |f| %>
+  <% if @subject.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@subject.errors.count, "error") %> prohibited this subject from being saved:</h2>
+
+      <ul>
+      <% @subject.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :title %><br>
+    <%= f.text_field :title %>
+  </div>
+  <p>Преподаватели:</p>
+  <div>
+    <ul>
+        <% Teacher.all.each do |teacher| %>
+            <li>
+                <%= check_box_tag 'teacher_ids[]', teacher.id %>
+                <%= h teacher.name + " " + teacher.patronymic + " " + teacher.surname  %>
+				
+            </li>
+        <% end %>
+    </ul>   
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

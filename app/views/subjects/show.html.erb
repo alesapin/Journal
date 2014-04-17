@@ -1,0 +1,27 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Title:</strong>
+  <%= @subject.title %>
+</p>
+
+<p>
+  <strong>Teachers:</strong>
+</p>
+<ul>
+	<% @subject.teachers.each do |teacher| %>
+		<li><%= teacher.name + " " + teacher.patronymic + " " + teacher.surname%></li>
+	<% end %>
+</ul>
+<ul>
+	<%@subject.groups.each do |group| %>
+		<li><%= group.name %></li>
+	<% end %>
+</ul>
+<ul>
+	<%@subject.pairs.each do |pair| %>
+		<li><%= pair %> </li<
+	<%end%>
+</ul>
+<%= link_to 'Edit', edit_subject_path(@subject) %> |
+<%= link_to 'Back', subjects_path %>

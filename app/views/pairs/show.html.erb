@@ -1,0 +1,22 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Subject:</strong>
+  <%= @pair.subject.title %>
+</p>
+
+<p>
+  <strong>Today:</strong>
+  <%= @pair.today %>
+</p>
+
+<p>
+	<strong>Students:</strong>
+</p>
+<ul>
+	<% @pair.misses.each do |miss| %>
+		<li><%= Student.find(miss.student_id).name %> <%= miss.hours %></li>
+	<% end %>
+</ul>
+<%= link_to 'Edit', edit_pair_path(@pair) %> |
+<%= link_to 'Back', pairs_path %>

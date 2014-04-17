@@ -1,0 +1,6 @@
+<p><strong>Группы по предмету: <%= @subj.title %> </strong></p>
+<ul>
+	<% @groups.each do |group| %>
+		<li> <%=link_to group.name, :controller => "pairs" ,:action => "new", :subject_id => @subj, :group_id => group.id %> </li>
+	<% end %>
+</ul>
