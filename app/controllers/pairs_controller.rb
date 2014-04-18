@@ -28,7 +28,8 @@ end
   def create
     @pair = Pair.new(pair_params)
 	Group.find(@pair.group_id).students.each do |student|
-		@pair.misses.build({:hours => params[:miss][:hours][student.id.to_s],:student_id => student.id})
+		@miss=@pair.misses.build({:hours => params[:miss][:hours][student.id.to_s],:student_id => student.id})
+	
 	end
     respond_to do |format|
       if @pair.save
