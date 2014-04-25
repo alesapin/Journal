@@ -1,6 +1,7 @@
 class SubjectsController < ApplicationController
+  skip_before_action :authorize, only: [ :show, :index,:student_statistics]
   before_action :set_subject, only: [:show, :edit, :update, :destroy]
-
+  Misc = Struct.new(:date,:hour)
   # GET /subjects
   # GET /subjects.json
   def index
@@ -64,6 +65,20 @@ class SubjectsController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+  def student_statistics
+	@subj=Subject.find(params[:subject_id])
+	@stud=Student.find(params[:student_id])
+	@pairs=@subj.pairs.where("group_id = #{@stud.group.id}")
+	@to_print = Array.new
+	@pairs.each do |pair|
+		pair.misses.where(" student_id = #{@stud.id}").each do |m|
+			@to_print << Misc.new(pair.today,m.hours)
+		end
+	end
+	
+  end
+
 
   private
     # Use callbacks to share common setup or constraints between actions.

@@ -1,5 +1,6 @@
 class PairsController < ApplicationController
   before_action :set_pair, only: [:show, :edit, :update, :destroy]
+  skip_before_action :authorize, only: [:show,:index]
 
   # GET /pairs
   # GET /pairs.json
@@ -71,7 +72,8 @@ end
   end
 
   def choose_subject
-	@subjects = Subject.all
+	@teacher=Teacher.find(params[:teacher_id])
+	@subjects = @teacher.subjects.to_a
   end	
 
   def choose_group

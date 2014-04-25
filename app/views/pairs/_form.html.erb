@@ -12,15 +12,17 @@
   <% end %>
 
   <p><strong>Создается пара по предмету <%=@subj.title%> для группы <%=@group.name%> </strong> </p>
-  <table>
+  <table class="table table-striped table-bordered">
 	<% @group.students.each do |student| %>
 	<%= fields_for :miss do |fm| %>
 	<tr>
-		<td><%= student.name + student.surname %> </td>
+		<td><%= student.name + " " + student.surname %> </td>
 		<% student.misses.each do |old_miss| %>	
-			<td><%= old_miss.hours%> </td>
+			<%if Pair.find(old_miss.pair_id).subject == @subj %>
+				<td><%= old_miss.hours%> </td>
+			<%end%>
 		<%end%>
-		<td><%= fm.text_field "hours[#{student.id}]" %> </td>
+		<td><%= fm.text_field "hours[#{student.id}]", :size=>"10",:value=>0 %> </td>
 	</tr>
 	<% end %>
 	<% end %>

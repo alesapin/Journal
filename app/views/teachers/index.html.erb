@@ -1,4 +1,7 @@
 <h1>Listing teachers</h1>
+<% if notice %>
+	<p id="notice"><%= notice %></p>
+<%end%>
 
 <table>
   <thead>
@@ -19,7 +22,7 @@
         <td><%= teacher.name %></td>
         <td><%= teacher.patronymic %></td>
         <td><%= teacher.surname %></td>
-        <td><%= teacher.academic_degree %></td>
+        <td><%= teacher.degree %></td>
         <td><%= link_to 'Show', teacher %></td>
         <td><%= link_to 'Edit', edit_teacher_path(teacher) %></td>
         <td><%= link_to 'Destroy', teacher, method: :delete, data: { confirm: 'Are you sure?' } %></td>

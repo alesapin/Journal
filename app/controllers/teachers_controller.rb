@@ -1,5 +1,6 @@
 class TeachersController < ApplicationController
   before_action :set_teacher, only: [:show, :edit, :update, :destroy]
+  skip_before_action :authorize, only: [:show,:index]
 
   # GET /teachers
   # GET /teachers.json
@@ -28,7 +29,7 @@ class TeachersController < ApplicationController
 
     respond_to do |format|
       if @teacher.save
-        format.html { redirect_to @teacher, notice: 'Teacher was successfully created.' }
+        format.html { redirect_to teachers_url, notice: "Teacher #{@teacher.name + " " + @teacher.surname} was successfully created." }
         format.json { render action: 'show', status: :created, location: @teacher }
       else
         format.html { render action: 'new' }
@@ -42,7 +43,7 @@ class TeachersController < ApplicationController
   def update
     respond_to do |format|
       if @teacher.update(teacher_params)
-        format.html { redirect_to @teacher, notice: 'Teacher was successfully updated.' }
+        format.html { redirect_to teachers_url, notice: "Teacher #{@teacher.name + " " + @teacher.surname} was successfully updated." }
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }
@@ -69,6 +70,6 @@ class TeachersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def teacher_params
-      params.require(:teacher).permit(:academic_degree, :name, :surname,:patronymic)
+      params.require(:teacher).permit(:degree, :name, :surname,:patronymic,:login,:password,:password_confirmation)
     end
 end

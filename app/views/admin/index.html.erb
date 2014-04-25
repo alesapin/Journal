@@ -1,0 +1,32 @@
+<div class="container">
+<div class="page-header">
+<h1>Добро пожаловать, <%= @teacher.name + " " + @teacher.surname %></h1>
+</div>
+<div class="row">
+	<div class="col-sm-4">
+		<h2>Ваши группы:</h2>
+		<ul style="list-style: none;" class="list-group">
+			<% @groups.uniq.each do |group| %>
+				<li><%= link_to group.name ,"/groups/#{group.id}",{:class=>"list-group-item"} %></li>
+			<% end %>
+		</ul>
+	</div>
+
+	<div class="col-sm-4">
+		<h2>Ваши предметы:</h2>
+		<ul style="list-style: none;" class="list-group">
+			<% @subjects.each do |subject| %>
+				<li><h5><%= link_to subject.title ,"/subjects/#{subject.id}",{:class=>"list-group-item"} %></h5></li>
+			<% end %>
+		</ul>
+	</div>
+</div>
+	<div style="float: left; width: auto;">
+	<%= button_to 'Выйти',logout_path, method: :delete,:class => "btn btn-warning" %>
+    </div>
+
+    <div style="float: left; width: auto; padding-left: 10px;">
+	<%= button_to 'Новая пара',{:controller => "pairs",:action => "choose_subject",:teacher_id=>@teacher.id},{:class => "btn btn-warning"} %>
+    </div>
+
+</div>

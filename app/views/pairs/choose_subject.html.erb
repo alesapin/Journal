@@ -1,6 +1,9 @@
-<p><strong>Предметы:</strong></p>
-<ul>
-	<% @subjects.each do |sbj| %>
-		<li><%=link_to sbj.title, :controller => "pairs",:action => "choose_group", :subject_id => sbj %> </li>
-	<%end%>
-</ul>
+<div class="col-sm-4">
+    <h2>Ваши предметы:</h2>
+    <ul style="list-style: none;" class="list-group">
+        <% @subjects.each do |subject| %>
+		    <li><%=link_to subject.title, {:controller => "pairs",:action => "choose_group", :teacher_id => params[:teacher_id],:subject_id => subject.id },{:class=>"list-group-item"}%> </li>
+        <% end %>
+    </ul>
+</div>
+

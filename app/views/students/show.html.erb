@@ -1,23 +1,45 @@
 <p id="notice"><%= notice %></p>
-
-<p>
-  <strong>Name:</strong>
+<div class="container">
+	<div class="page-header">
+		<h1>Профиль студента</h1>
+	</div>
+<h3>
+  <strong>Имя:</strong>
   <%= @student.name %>
-</p>
+</h3>
 
-<p>
-  <strong>Surname:</strong>
+<h3>
+  <strong>Фамилия:</strong>
   <%= @student.surname %>
-</p>
+</h3>
 
-<p>
-  <strong>Group:</strong>
+<h3>
+  <strong>Группа:</strong>
   <%= @student.group.name %>
-</p>
-<ul>
-	<%@student.group.subjects.each do |subj|  %>
-		<li><%= subj.title %> </li>
+</h3>
+<h3><strong>Изучаемые предметы:</strong></h3>
+<div class="row">
+	<div class="col-sm-4">
+    	<ul style="list-style: none;" class="list-group">
+        	<% @student.group.subjects.each do |subj| %>
+            	<li><h5><%= link_to subj.title ,{:controller => :subjects,:action=> :student_statistics,:student_id => @student.id,:subject_id => subj.id},{:class=>"list-group-item"} %></h5></li>
+        	<% end %>
+    	</ul>
+	</div>
+</div>
+<p>
+	<% if session[:teacher_id] %>
+	<div style="float: left; width: auto;">
+	<%= button_to 'Редактировать', edit_student_path(@student), :class =>"btn btn-warning",:method => :get %> 
+	</div>
+
+	<div style="float: left; width: auto; padding-left: 10px;">
+	<%= button_to 'Удалить', @student,:class => "btn btn-danger",:method => :delete,data: {confirm: "Вы уверены?"} %>
+	</div>
 	<% end %>
-</ul>
-<%= link_to 'Edit', edit_student_path(@student) %> |
-<%= link_to 'Back', students_path %>
+	<div style="float: left; width: auto; padding-left: 10px;">
+	<%= button_to 'Назад', students_path,:class => "btn btn-info",:method => :get %>
+	</div>
+
+</p>
+</div>

@@ -1,30 +1,54 @@
 <p id="notice"><%= notice %></p>
-
-<p>
-  <strong>Name:</strong>
+<div class="container">
+<div class="page-header">
+	<h1>Профиль группы</h1>
+</div>
+<h3>
+  <strong>Номер группы:</strong>
   <%= @group.name %>
-</p>
+</h3>
 
-<p>
-  <strong>Course:</strong>
+<h3>
+  <strong>Курс:</strong>
   <%= @group.course %>
-</p>
+</h3>
 
+<h3>
+  <strong>Число студентов:</strong>
+  <%= @group.students.count %>
+</h3>
+<div class="row">
+	<div class="col-sm-4">
+		<h3><strong>Изучаемые предметы:</strong></h3>
+		<ul style="list-style: none;" class="list-group">	
+			<% @group.subjects.each do |subj| %>
+				<li><h5><%=link_to subj.title,subj,:class => "list-group-item"%></h5></li>
+			<% end %>
+		</ul>
+	</div>
+	<div class="col-sm-4">
+		<h3><strong>Студенты:</strong></h3>
+		<ul style="list-style: none;" class="list-group">	
+			<% Student.where(group: @group).each do |student| %>
+				<li><%=link_to student.name + " " +student.surname,student,:class => "list-group-item"%></li>
+			<% end %>
+		</ul>
+	</div>
+</div>
 <p>
-  <strong>Number of students:</strong>
-  <%= @group.number_of_students %>
+	<%if session[:teacher_id] %>
+	 <div style="float: left; width: auto;">
+    <%= button_to 'Редактировать', edit_group_path(@group), :class =>"btn btn-warning",:method => :get %>  
+    </div>
+
+	<div style="float: left; width: auto; padding-left: 10px;">
+    <%= button_to 'Удалить', @group,:class => "btn btn-danger",:method => :delete,data: {confirm: "Вы уверены?"} %>
+    </div>
+	<% end %>
+	<div style="float: left; width: auto; padding-left: 10px;">
+    <%= button_to 'Назад', groups_path,:class => "btn btn-info",:method => :get %>
+    </div>
+	
+
 </p>
-<p><strong>Subjects:</strong></p>
-<ul>	
-	<% @group.subjects.each do |subj| %>
-		<li><%= subj.title %> </li>
-	<% end %>
-</ul>
-<p><strong>Students:</strong></p>
-<ul>
-	<% Student.where(group: @group).each do |student| %>
-		<li><%= student.name %> <%= student.surname%></li>
-	<% end %>
-</ul>
-<%= link_to 'Edit', edit_group_path(@group) %> |
-<%= link_to 'Back', groups_path %>
+</div>

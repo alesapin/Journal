@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140417122608) do
+ActiveRecord::Schema.define(version: 20140418121554) do
 
   create_table "groups", force: true do |t|
     t.string   "name"
@@ -75,12 +75,12 @@ ActiveRecord::Schema.define(version: 20140417122608) do
   add_index "subjects_teachers", ["teacher_id"], name: "index_subjects_teachers_on_teacher_id"
 
   create_table "teachers", force: true do |t|
-    t.string   "academic_degree"
-    t.string   "name"
-    t.string   "surname"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.string   "patronymic"
+    t.string "login"
+    t.string "password_digest"
+    t.string "name"
+    t.string "patronymic"
+    t.string "surname"
+    t.string "degree"
   end
 
 end

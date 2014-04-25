@@ -1,12 +1,24 @@
 Journal2::Application.routes.draw do
+  get "admin/index"
+  controller :sessions do
+	get 'login' => :new
+	post 'login' => :create
+	delete 'logout' => :destroy
+  end
+  get "sessions/create"
+  get "sessions/destroy"
   resources :teachers
 
   resources :misses
 
   get "pairs/choose_group"
   get "pairs/choose_subject"
-  
+  get "admin/choose_subject"
+  get "admin/choose_group"
+  post "pairs/choose_group"
+  post "pairs/choose_subject" 
   resources :pairs
+  get "subjects/student_statistics"
 
   resources :students
 

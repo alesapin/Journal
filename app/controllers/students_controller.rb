@@ -1,5 +1,6 @@
 class StudentsController < ApplicationController
   before_action :set_student, only: [:show, :edit, :update, :destroy]
+  skip_before_action :authorize, only: [:index,:show, :edit, :update, :destroy, :create]
 
   # GET /students
   # GET /students.json
@@ -10,6 +11,17 @@ class StudentsController < ApplicationController
   # GET /students/1
   # GET /students/1.json
   def show
+	
+	@misses=Array.new
+	@student.group.subjects.each do |subj|
+		tmp=Array.new
+		@student.misses.each do |miss|
+			if Pair.find(miss.pair_id).subject==subj
+				tmp << miss
+			end
+		end
+		@misses << tmp
+	end
   end
 
   # GET /students/new
