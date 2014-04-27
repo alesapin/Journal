@@ -88,6 +88,6 @@ end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def pair_params
-      params.require(:pair).permit(:group_id,:subject_id, :today)
+      params.require(:pair).permit(:group_id,:subject_id,:teacher_id,:number,:auditory,:today)
     end
 end

@@ -1,31 +1,21 @@
-<h1>Listing groups</h1>
+<div class="page-header">
+	<h1>Список групп</h1>
+</div>
+<% i = 1 %>
+<div class="row">
+<% while i < 5 %>
+	<%Group.where("course = #{i}").each do |one_group|%>
+		<div class="col-sm-4 thumbnail" align="center" >
+			<h2><%= "#{i}" + " курс" %> </h2>
+			<ul style="list-style: none;" class="list-group">
+				<li><h5><%= link_to one_group.name ,one_group,{:class=>"list-group-item btn-link"} %></h5></li>
+			</ul>
+		</div>
+	<% end %>
+	<% i+=1 %>
+<%end %>
+</div>
 
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Course</th>
-      <th>Number of students</th>
-      <th></th>
-      <th></th>
-      <th></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @groups.each do |group| %>
-      <tr>
-        <td><%= group.name %></td>
-        <td><%= group.course %></td>
-        <td><%= group.students.count %></td>
-        <td><%= link_to 'Show', group %></td>
-        <td><%= link_to 'Edit', edit_group_path(group) %></td>
-        <td><%= link_to 'Destroy', group, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<br>
-
-<%= link_to 'New Group', new_group_path %>
+<% if session[:teacher_id] %>
+<%= button_to 'Создать группу', new_group_path,:class => "btn btn-info",:method => :get %>
+<%end %>

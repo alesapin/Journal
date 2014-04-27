@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140418121554) do
+ActiveRecord::Schema.define(version: 20140427120132) do
 
   create_table "groups", force: true do |t|
     t.string   "name"
@@ -45,6 +45,9 @@ ActiveRecord::Schema.define(version: 20140418121554) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "group_id"
+    t.integer  "auditory"
+    t.integer  "number"
+    t.integer  "teacher_id"
   end
 
   add_index "pairs", ["group_id"], name: "index_pairs_on_group_id"
@@ -64,6 +67,7 @@ ActiveRecord::Schema.define(version: 20140418121554) do
     t.string   "title"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "img"
   end
 
   create_table "subjects_teachers", id: false, force: true do |t|
@@ -81,6 +85,7 @@ ActiveRecord::Schema.define(version: 20140418121554) do
     t.string "patronymic"
     t.string "surname"
     t.string "degree"
+    t.string "img"
   end
 
 end

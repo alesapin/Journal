@@ -1,28 +1,13 @@
-<h1>Listing subjects</h1>
-
-<table>
-  <thead>
-    <tr>
-      <th>Title</th>
-      <th>Teacher</th>
-      <th></th>
-      <th></th>
-      <th></th>
-    </tr>
-  </thead>
-
-  <tbody>
+<div class="page-header">
+	<h1>Предметы</h1>
+</div>
+<div class="row">
     <% @subjects.each do |subject| %>
-      <tr>
-        <td><%= subject.title %></td>
-        <td><%= link_to 'Show', subject %></td>
-        <td><%= link_to 'Edit', edit_subject_path(subject) %></td>
-        <td><%= link_to 'Destroy', subject, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
+		<div class="col-md-2" align="center">
+        	<%= link_to image_tag(subject.img,:class=>"img-responsive")+subject.title,subject,:class=>"thumbnail btn-link" ,:style=>"font-weight:bold;"%>
+		</div>
     <% end %>
-  </tbody>
-</table>
-
-<br>
-
-<%= link_to 'New Subject', new_subject_path %>
+</div>
+<% if session[:teacher_id] %>
+<%= button_to 'Создать предмет', new_subject_path,:class=>"btn btn-info",:method=> :get %>
+<% end %>

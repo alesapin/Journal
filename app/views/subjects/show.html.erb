@@ -1,27 +1,42 @@
 <p id="notice"><%= notice %></p>
-
+<div class="page-header">
+  <h1><%= @subject.title %></h1>
+</div>
+<div class="row">
+	<div class="col-sm-4 ">
+		<h3>
+		  <strong>Преподаватели:</strong>
+		</h3>
+		
+		<ul style="list-style: none;" class="list-group">
+			<% @subject.teachers.each do |teacher| %>
+				<li>
+					<%= link_to teacher.name + " " + teacher.patronymic + " " + teacher.surname,teacher,:class=> "list-group-item"%>
+				</li>
+			<% end %>
+		</ul>
+	</div>
+	<div class="col-sm-4">
+		<h3><strong>Изучающие группы:</strong> </h3>
+		<ul style="list-style: none;" class="list-group">
+			<%@subject.groups.each do |group| %>
+				<li><%= link_to group.name,group,:class=>"list-group-item" %></li>
+			<% end %>
+		</ul>
+	</div>
+</div>
 <p>
-  <strong>Title:</strong>
-  <%= @subject.title %>
-</p>
+    <% if session[:teacher_id] %>
+    <div style="float: left; width: auto;">
+    <%= button_to 'Редактировать', edit_subject_path(@subject), :class =>"btn btn-warning",:method => :get %>  
+    </div>
 
-<p>
-  <strong>Teachers:</strong>
+    <div style="float: left; width: auto; padding-left: 10px;">
+    <%= button_to 'Удалить', @subject,:class => "btn btn-danger",:method => :delete,data: {confirm: "Вы уверены?"} %>
+    </div>
+    <% end %>
+    <div style="float: left; width: auto; padding-left: 10px;">
+    <%= button_to 'Назад', subjects_path,:class => "btn btn-info",:method => :get %>
+    </div>
+
 </p>
-<ul>
-	<% @subject.teachers.each do |teacher| %>
-		<li><%= teacher.name + " " + teacher.patronymic + " " + teacher.surname%></li>
-	<% end %>
-</ul>
-<ul>
-	<%@subject.groups.each do |group| %>
-		<li><%= group.name %></li>
-	<% end %>
-</ul>
-<ul>
-	<%@subject.pairs.each do |pair| %>
-		<li><%= pair %> </li<
-	<%end%>
-</ul>
-<%= link_to 'Edit', edit_subject_path(@subject) %> |
-<%= link_to 'Back', subjects_path %>

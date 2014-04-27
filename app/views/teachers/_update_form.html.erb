@@ -11,18 +11,6 @@
     </div>
   <% end %>
   <div class="field">
-  	<%= f.label :login %>
-	<%= f.text_field :login %>
-  </div>
-  <div class="field">
-  	<%= f.label :password %>
-	<%= f.password_field :password, size: 40 %>
-  </div>
-  <div>
-	<%= f.label :password_confiramtion %>
-    <%= f.password_field :password_confirmation, size: 40 %>
-  </div>
-  <div class="field">
     <%= f.label :name %><br>
     <%= f.text_field :name %>
   </div>
@@ -39,10 +27,11 @@
     <%= f.text_field :degree %>
   </div>
   <div class="field">
-	<%= f.label :img %><br>
-	<%= f.text_field :img %>
+    <%= f.label :img %><br>
+    <%= f.text_field :img %>
   </div>
   <div class="actions">
     <%= f.submit %>
   </div>
 <% end %>
+

@@ -1,5 +1,4 @@
 <p id="notice"><%= notice %></p>
-<div class="container">
 <div class="page-header">
 	<h1>Профиль группы</h1>
 </div>
@@ -22,7 +21,7 @@
 		<h3><strong>Изучаемые предметы:</strong></h3>
 		<ul style="list-style: none;" class="list-group">	
 			<% @group.subjects.each do |subj| %>
-				<li><h5><%=link_to subj.title,subj,:class => "list-group-item"%></h5></li>
+				<li><h5><%=link_to subj.title,subj,:class => " btn-link list-group-item "%></h5></li>
 			<% end %>
 		</ul>
 	</div>
@@ -30,7 +29,7 @@
 		<h3><strong>Студенты:</strong></h3>
 		<ul style="list-style: none;" class="list-group">	
 			<% Student.where(group: @group).each do |student| %>
-				<li><%=link_to student.name + " " +student.surname,student,:class => "list-group-item"%></li>
+				<li><%=link_to student.name + " " +student.surname,student,:class => "btn-link list-group-item"%></li>
 			<% end %>
 		</ul>
 	</div>
@@ -51,4 +50,3 @@
 	
 
 </p>
-</div>

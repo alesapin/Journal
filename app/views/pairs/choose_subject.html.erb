@@ -1,5 +1,5 @@
 <div class="col-sm-4">
-    <h2>Ваши предметы:</h2>
+    <h2>Выберите предмет:</h2>
     <ul style="list-style: none;" class="list-group">
         <% @subjects.each do |subject| %>
 		    <li><%=link_to subject.title, {:controller => "pairs",:action => "choose_group", :teacher_id => params[:teacher_id],:subject_id => subject.id },{:class=>"list-group-item"}%> </li>

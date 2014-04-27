@@ -1,23 +1,48 @@
 <p id="notice"><%= notice %></p>
+<div class="page-header">
+	<h1>Профиль преподавателя </h1>
+</div>
+<div class="row">
+	<div class="col-sm-6">
+		<h3>
+		  <strong>Имя:</strong>
+		  <%= @teacher.name %>
+		</h3>
+		<h3>
+		  <strong>Отчество:</strong>
+		  <%= @teacher.patronymic %>
+		</h3>
+		
+		<h3>
+		  <strong>Фамилия:</strong>
+		  <%= @teacher.surname %>
+		</h3>
+		<h3>
+		  <strong>Научная степень:</strong>
+		  <%= @teacher.degree %>
+		</h3>
+	</div>
+	<div class="col-sm-4 thumbnail">
+		<%= image_tag(@teacher.img,:class=>"img-responsive") %>
+	</div> 
+</div>
 
+<% if session[:teacher_id] == @teacher.id %>
 
-<p>
-  <strong>Name:</strong>
-  <%= @teacher.name %>
-</p>
-<p>
-  <strong>Patronymic:</strong>
-  <%= @teacher.patronymic %>
-</p>
+    <div style="float: left; width: auto;">
+    <%= button_to 'Перейти в личный кабинет', "/admin/index", :class =>"btn btn-success",:method => :get %>  
+    </div>
 
-<p>
-  <strong>Surname:</strong>
-  <%= @teacher.surname %>
-</p>
-<p>
-  <strong>Academic degree:</strong>
-  <%= @teacher.degree %>
-</p>
+    <div style="float: left; width: auto; padding-left: 10px;">
+    <%= button_to 'Редактировать', edit_teacher_path(@teacher), :class =>"btn btn-warning",:method => :get %>  
+    </div>
 
-<%= link_to 'Edit', edit_teacher_path(@teacher) %> |
-<%= link_to 'Back', teachers_path %>
+    <div style="float: left; width: auto; padding-left: 10px;">
+    <%= button_to 'Удалить', @teacher,:class => "btn btn-danger",:method => :delete,data: {confirm: "Вы уверены?"} %>
+    </div>
+    <% end %>
+    <div style="float: left; width: auto; padding-left: 10px;">
+    <%= button_to 'Назад', teachers_path,:class => "btn btn-info",:method => :get %>
+    </div>
+
+</p>

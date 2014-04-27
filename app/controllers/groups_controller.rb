@@ -45,6 +45,12 @@ class GroupsController < ApplicationController
   # PATCH/PUT /groups/1
   # PATCH/PUT /groups/1.json
   def update
+	subj_ids=params[:subject_ids]
+	@group.subjects.clear
+	subj_ids.each do |subj_id|
+		s=Subject.find(subj_id)
+		s.groups << @group
+	end
     respond_to do |format|
       if @group.update(group_params)
         format.html { redirect_to @group, notice: 'Group was successfully updated.' }

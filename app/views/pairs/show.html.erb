@@ -9,14 +9,19 @@
   <strong>Today:</strong>
   <%= @pair.today %>
 </p>
-
+<p>
+	<strong>Teacher:</strong>
+	<%= @pair.teacher.name + " " + @pair.teacher.surname %>
+</p>
 <p>
 	<strong>Students:</strong>
 </p>
+
 <ul>
 	<% @pair.misses.each do |miss| %>
 		<li><%= Student.find(miss.student_id).name %> <%= miss.hours %></li>
 	<% end %>
 </ul>
+
 <%= link_to 'Edit', edit_pair_path(@pair) %> |
 <%= link_to 'Back', pairs_path %>

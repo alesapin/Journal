@@ -11,12 +11,26 @@
     </div>
   <% end %>
 
-  <p><strong>Создается пара по предмету <%=@subj.title%> для группы <%=@group.name%> </strong> </p>
-  <table class="table table-striped table-bordered">
+  <div class="page-header">
+		<h2><strong>Создается пара по предмету <%=@subj.title%> для группы <%=@group.name%> </strong> </h2>
+  </div>
+  
+  <h3>Номер пары: </h3><%= f.text_field :number %>
+  <h3>Номер аудитории: </h3> <%= f.text_field :auditory %>
+  <br>
+  <br>
+  <table class="table table-striped table-bordered" >
+	<tr>
+	<th>Студент</th>
+	<% Pair.where("group_id = ? AND subject_id = ?",@group.id,@subj.id).each do |pair|%>
+		<th><%=pair.today%></th>
+	<% end %>
+	<th><%=Date.today%></th>
+	</tr>
 	<% @group.students.each do |student| %>
 	<%= fields_for :miss do |fm| %>
 	<tr>
-		<td><%= student.name + " " + student.surname %> </td>
+		<td width="40%"><%= student.name + " " + student.surname %> </td>
 		<% student.misses.each do |old_miss| %>	
 			<%if Pair.find(old_miss.pair_id).subject == @subj %>
 				<td><%= old_miss.hours%> </td>
@@ -27,13 +41,11 @@
 	<% end %>
 	<% end %>
   </table>
-  <div class="field">
-    <%= f.label :today %><br>
-    <%= f.date_select :today %>
-  </div>
+  <%= f.hidden_field :today, :value => Date.today %>
   <%= f.hidden_field :subject_id,:value => @subj.id %>
   <%= f.hidden_field :group_id, :value =>  @group.id %>
+  <%= f.hidden_field :teacher_id, :value => params[:teacher_id] %>
   <div class="actions">
-    <%= f.submit 'OK' %>
+    <%= f.submit 'Создать',:class=>"btn btn-lg btn-primary" %>
   </div>
 <% end %>

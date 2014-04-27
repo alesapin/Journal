@@ -1,6 +1,9 @@
-<p><strong>Группы по предмету: <%= @subj.title %> </strong></p>
-<ul>
-	<% @groups.each do |group| %>
-		<li> <%=link_to group.name, :controller => "pairs" ,:action => "new", :subject_id => @subj, :group_id => group.id %> </li>
-	<% end %>
-</ul>
+<div class="col-sm-4">
+    <h2>Выберите Группу:</h2>
+    <ul style="list-style: none;" class="list-group">
+        <% @groups.each do |group| %>
+            <li><%=link_to group.name, {:controller => "pairs",:action => "new",:teacher_id=>params[:teacher_id],:subject_id =>@subj.id,:group_id=>group.id },{:class=>"list-group-item btn-link"}%> </li>
+        <% end %>
+    </ul>
+</div>
+

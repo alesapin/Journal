@@ -45,6 +45,12 @@ class SubjectsController < ApplicationController
   # PATCH/PUT /subjects/1
   # PATCH/PUT /subjects/1.json
   def update
+	teacher_ids=params[:teacher_ids]
+	@subject.teachers.clear
+	teacher_ids.each do |teacher|
+		t=Teacher.find(teacher)
+		t.subjects << @subject
+	end
     respond_to do |format|
       if @subject.update(subject_params)
         format.html { redirect_to @subject, notice: 'Subject was successfully updated.' }
@@ -88,6 +94,6 @@ class SubjectsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def subject_params
-      params.require(:subject).permit(:title, :teacher)
+      params.require(:subject).permit(:title, :teacher, :img)
     end
 end

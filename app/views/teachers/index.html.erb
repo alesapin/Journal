@@ -1,36 +1,13 @@
-<h1>Listing teachers</h1>
-<% if notice %>
-	<p id="notice"><%= notice %></p>
-<%end%>
-
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Patronymic</th>
-      <th>Surname</th>
-      <th>Academic degree</th>
-      <th></th>
-      <th></th>
-      <th></th>
-    </tr>
-  </thead>
-
-  <tbody>
+<div class="page-header">
+    <h1>Преподаватели</h1>
+</div>
+<div class="row">
     <% @teachers.each do |teacher| %>
-      <tr>
-        <td><%= teacher.name %></td>
-        <td><%= teacher.patronymic %></td>
-        <td><%= teacher.surname %></td>
-        <td><%= teacher.degree %></td>
-        <td><%= link_to 'Show', teacher %></td>
-        <td><%= link_to 'Edit', edit_teacher_path(teacher) %></td>
-        <td><%= link_to 'Destroy', teacher, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
+        <div class="col-md-2" align="center">
+            <%= link_to image_tag(teacher.img,:class=>"img-responsive") + teacher.name + " " + teacher.patronymic + " " + teacher.surname,teacher,:class=>"thumbnail btn-link" ,:style=>"font-weight:bold;"%>
+        </div>
     <% end %>
-  </tbody>
-</table>
-
-<br>
-
-<%= link_to 'New Teacher', new_teacher_path %>
+</div>
+<% if session[:teacher_id] %>
+<%= button_to 'Зарегистрировать преподавателя', new_teacher_path,:method => :get,:class=>"btn btn-info" %>
+<% end %>
