@@ -11,6 +11,11 @@ class GroupsController < ApplicationController
   # GET /groups/1
   # GET /groups/1.json
   def show
+    @all_subjs=all_subjects
+    @summary=@all_subjs.inject(0) { |sum,tuple| sum+=tuple[1]}
+    @all_subjs.each do |tuple|
+      tuple[1]=Float(tuple[1])/@summary
+    end
   end
 
   # GET /groups/new
@@ -70,6 +75,17 @@ class GroupsController < ApplicationController
       format.html { redirect_to groups_url }
       format.json { head :no_content }
     end
+  end
+
+  def all_subjects
+      @all_subjs = Hash.new
+      @group.subjects.each do |subj|
+        @all_subjs[subj.title]=0;
+      end
+      Pair.where("group_id = #{@group.id}").each do |pair|
+          @all_subjs[pair.subject.title]+=2
+      end
+      @all_subjs.sort_by {|k,v| -v}
   end
 
   private

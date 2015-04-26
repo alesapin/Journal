@@ -11,7 +11,7 @@
 		<ul style="list-style: none;" class="list-group">
 			<% @subject.teachers.each do |teacher| %>
 				<li>
-					<%= link_to teacher.name + " " + teacher.patronymic + " " + teacher.surname,teacher,:class=> "list-group-item"%>
+					<%= link_to teacher.name + " " + teacher.patronymic + " " + teacher.surname,teacher,:class=> "list-group-item btn-link"%>
 				</li>
 			<% end %>
 		</ul>
@@ -20,9 +20,11 @@
 		<h3><strong>Изучающие группы:</strong> </h3>
 		<ul style="list-style: none;" class="list-group">
 			<%@subject.groups.each do |group| %>
-				<li><%= link_to group.name,group,:class=>"list-group-item" %></li>
+				<li><%= link_to group.name,group,:class=>"list-group-item btn-link" %></li>
 			<% end %>
 		</ul>
+	</div>
+	<div class="col-sm-4">
 	</div>
 </div>
 <p>

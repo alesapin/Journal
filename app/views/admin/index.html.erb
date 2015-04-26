@@ -6,7 +6,7 @@
 		<h2>Ваши группы:</h2>
 		<ul style="list-style: none;" class="list-group">
 			<% @groups.uniq.each do |group| %>
-				<li><%= link_to group.name ,"/groups/#{group.id}",{:class=>"list-group-item btn-link"} %></li>
+				<li><h5><%= link_to group.name ,"/groups/#{group.id}",{:class=>"list-group-item btn-link"} %></h5></li>
 			<% end %>
 		</ul>
 	</div>

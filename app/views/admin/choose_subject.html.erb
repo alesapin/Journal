@@ -1,11 +1,12 @@
 <h2>Выберите предмет:</h2>
 <div class="col-sm-4">
-    <ul class="list-group">
+    <ul style="list-style: none;" class="list-group">
         <% @subjects.each do |subject| %>
-            <li class="list-group-item"><%= link_to subject.title ,	
-			{:controller => "admin",:action => "choose_group",:subject_id =>subject.id},
-			{:class=>"list-group-item"} %>
-		</li>
+            <li>
+	            <%= link_to subject.title ,	
+				{:controller => "admin",:action => "choose_group",:subject_id =>subject.id},
+				{:class=>"list-group-item btn-link"} %>
+			</li>
         <% end %>
     </ul>
 </div>

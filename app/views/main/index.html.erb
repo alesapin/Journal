@@ -1,7 +1,136 @@
 <br>
 <div class="container">
-<div class="jumbotron">
+<div class="jumbotron" align="center">
         <h1>Журнал для института!</h1>
-        <p>Здесь будет статиска и топы забивающих</p>
+</div>
+<script type="text/javascript">
+	$(function () {
+        $('#failers').highcharts({
+        	chart: {
+        		type: 'column'
+        	},
+            title: {
+                text: "Топ забивающих за период с <%= Date.today - 1.week %> по <%=Date.today%>",
+                x: -20 //center
+            },
+            xAxis: {
+            	title: {
+            		text: 'Студенты'
+            	},
+                categories: <%=raw (MainController.get_top_misses.collect {|a| a[0]}).as_json %>
+            },
+            yAxis: {
+                title: {
+                    text: 'Часов пропущено'
+                },
+                plotLines: [{
+                    value: 0,
+                    width: 1,
+                    color: '#808080'
+                }]
+            },
+            series: [{
+            	name: 'Часов пропущено',
+                data: <%= MainController.get_top_misses.collect {|a| a[1]} %>,
+                color: '#ff6600'
+            }]
+        });
+    });
+</script>
+
+<script type="text/javascript">
+    $(function () {
+        $('#teachers').highcharts({
+            chart: {
+                type: 'bar'
+            },
+            title: {
+                text: "Наиболее пропускаемые предметы "
+            },
+            xAxis: {
+                categories:  <%=raw (MainController.top_missed_subject.collect {|a| a[0]}).as_json %>,
+                title: {
+                    text: null
+                }
+            },
+            yAxis: {
+                min: 0,
+                title: {
+                    text: 'Часов пропущено',
+                    align: 'high'
+                },
+                labels: {
+                    overflow: 'justify'
+                }
+            },
+            tooltip: {
+                valueSuffix: ''
+            },
+            plotOptions: {
+                bar: {
+                    dataLabels: {
+                        enabled: true
+                    }
+                }
+            },
+            legend: {
+                layout: 'vertical',
+                align: 'right',
+                verticalAlign: 'top',
+                x: -40,
+                y: 100,
+                floating: true,
+                borderWidth: 1,
+                backgroundColor: (Highcharts.theme && Highcharts.theme.legendBackgroundColor || '#FFFFFF'),
+                shadow: true
+            },
+            credits: {
+                enabled: false
+            },
+            series: [{
+                showInLegend: false,               
+                name: "с <%= "#{Date.today - 1.month} по #{Date.today}" %>",
+                data:  <%=raw (MainController.top_missed_subject.collect {|a| a[1][0]}).as_json %>
+            },{
+                showInLegend: false,
+                name: "с <%= "#{Date.today - 2.month} по #{Date.today - 1.month}" %>",
+                data:  <%=raw (MainController.top_missed_subject.collect {|a| a[1][1]}).as_json %>
+            }]
+        });
+    });
+</script> 
+<hr>
+   <div class="container">
+      <!-- Example row of columns -->
+      <div class="row">
+        <div class="col-md-4 " align="center">
+          <h2>На этой неделе проведено пар</h2>
+          <br>
+          <br>
+          <br>
+
+          <p><font size="30"><%=MainController.get_pairs_today%></font></p>
+
+        </div>
+        <div class="col-md-4" align="center">
+          <h2>Среднее число пар в день</h2>
+          <br>
+          <br>
+          <br>
+          <p><font size="30"><%=MainController.middle_pairs.round(2)%></font></p>
+
+       </div>
+        <div class="col-md-4" align="center">
+          <h2>Наибольшее число пар, проведенное одним преподавателем</h2>
+          <br>
+          <p><font size="30"><%=MainController.max_pairs%></font></p>
+
+        </div>
+      </div>
+<hr>
+<div class="row">
+	<div class="col-sm-6 thumbnail" id="failers" ></div>
+    <div class="col-sm-6 thumbnail" id="teachers" ></div>
+
 </div>
 </div>

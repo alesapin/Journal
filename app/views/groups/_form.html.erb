@@ -10,30 +10,37 @@
       </ul>
     </div>
   <% end %>
-
+<div class="row">
+  <div class="col-sm-6">
   <div class="field">
-    <%= f.label :name %><br>
-    <%= f.text_field :name %>
+    <h3>Код группы</h3>
+    <%= f.text_field :name, :class => "form-control"%>
   </div>
-  <div class="field">
-    <%= f.label :course %><br>
-    <%= f.number_field :course %>
-  </div>
-  <div class="field">
-    <%= f.label :number_of_students %><br>
-    <%= f.number_field :number_of_students %>
-  </div>
+  <label for="sel"><h3>Курс  </h3></label>
+  <%= f.select :course, options_for_select([[1,1],[2,2],[3,3],[4,4],[5,5],[6,6]],1),:id => "sel" %>
   <div>
-	<ul>
+  <h3>Предметы</h3>
+  <div class="checkbox">
+	<ul style="list-style: none;">
 		<% Subject.all.each do |subject| %>
 			<li>
 				<%= check_box_tag 'subject_ids[]', subject.id %>
-				<%= h subject.title %>
+				<h5><%= subject.title %></h5>
 			</li>
 		<% end %>
 	</ul>	
   </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+</div>
+<br>
+  <%if @group.new_record? %>
+    <div class="actions">
+      <%= f.submit "Создать",:class => "btn btn-warning"%>
+    </div>
+  <%else%>
+    <div class="actions">
+      <%= f.submit "Изменить",:class => "btn btn-warning"%>
+    </div>
+  <%end%>
+</div>
+</div>
 <% end %>

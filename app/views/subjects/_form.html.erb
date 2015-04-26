@@ -10,29 +10,39 @@
       </ul>
     </div>
   <% end %>
-
+<div class="row">
+<div class="col-sm-6">
   <div class="field">
-    <%= f.label :title %><br>
-    <%= f.text_field :title %>
+    <h3>Название</h3>
+    <%= f.text_field :title,:class => "form-control"%>
   </div>
   <div class="field">
-	<%= f.label :img %><br>
-	<%= f.text_field :img %>
+    <h3>Ссылка на изображение</h3>
+	<%= f.text_field :img,:class => "form-control" %>
   </div>
-  </div>
-  <p>Преподаватели:</p>
-  <div>
-    <ul>
+  <h3>Преподаватели:</h3>
+  <div class="checkbox">
+    <ul style="list-style: none;">
         <% Teacher.all.each do |teacher| %>
             <li>
                 <%= check_box_tag 'teacher_ids[]', teacher.id %>
-                <%= h teacher.name + " " + teacher.patronymic + " " + teacher.surname  %>
+                <h5> <%=teacher.name + " " + teacher.patronymic + " " + teacher.surname  %></h5>
 				
             </li>
         <% end %>
     </ul>   
   </div>
-  <div class="actions">
-    <%= f.submit %>
+  <br>
+  <%if @subject.new_record? %>
+    <div class="actions">
+      <%= f.submit "Создать",:class => "btn btn-warning"%>
+    </div>
+  <%else%>
+    <div class="actions">
+      <%= f.submit "Изменить",:class => "btn btn-warning"%>
+    </div>
+  <%end%>
   </div>
+</div>
 <% end %>
+

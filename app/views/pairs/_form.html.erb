@@ -36,7 +36,15 @@
 				<td><%= old_miss.hours%> </td>
 			<%end%>
 		<%end%>
-		<td><%= fm.text_field "hours[#{student.id}]", :size=>"10",:value=>0 %> </td>
+		<!-- <td><%= fm.text_field "hours[#{student.id}]", :size=>"10",:value=>0 %> </td>-->
+    <td>
+        <label><%=0 %></label>
+        <%= fm.radio_button "hours[#{student.id}]",0,:checked=>true%>
+        <label><%=1 %></label>
+        <%= fm.radio_button "hours[#{student.id}]",1%>
+        <label><%=2 %></label>
+        <%= fm.radio_button "hours[#{student.id}]",2%>
+    </td>
 	</tr>
 	<% end %>
 	<% end %>

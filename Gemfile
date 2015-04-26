@@ -43,3 +43,5 @@ end
 
 # Use debugger
 # gem 'debugger', group: [:development, :test]
+gem 'highcharts-rails', '~> 4.0.0'
+gem 'whenever', :require => false

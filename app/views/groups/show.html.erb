@@ -17,7 +17,7 @@
   <%= @group.students.count %>
 </h3>
 <div class="row">
-	<div class="col-sm-4">
+	<div class="col-sm-6">
 		<h3><strong>Изучаемые предметы:</strong></h3>
 		<ul style="list-style: none;" class="list-group">	
 			<% @group.subjects.each do |subj| %>
@@ -25,7 +25,7 @@
 			<% end %>
 		</ul>
 	</div>
-	<div class="col-sm-4">
+	<div class="col-sm-6">
 		<h3><strong>Студенты:</strong></h3>
 		<ul style="list-style: none;" class="list-group">	
 			<% Student.where(group: @group).each do |student| %>
@@ -34,6 +34,46 @@
 		</ul>
 	</div>
 </div>
+
+<script type="text/javascript">
+
+$(function () {
+    $('#stat').highcharts({
+        chart: {
+            plotBackgroundColor: null,
+            plotBorderWidth: null,
+            plotShadow: false
+        },
+        title: {
+            text: 'Процентное соотношение количества часов по предметам'
+        },
+        tooltip: {
+    	    pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+        },
+        plotOptions: {
+            pie: {
+                allowPointSelect: true,
+                cursor: 'pointer',
+                dataLabels: {
+                    enabled: true,
+                    format: '<b>{point.name}</b>: {point.percentage:.1f} %',
+                    style: {
+                        color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
+                    }
+                }
+            }
+        },
+        series: [{
+            type: 'pie',
+            name: 'От общего числа часов',
+            data: <%=raw @all_subjs.to_json%>
+        }]
+    });
+});
+
+</script>
+<div class="thumbnail" id="stat" ></div>
+
 <p>
 	<%if session[:teacher_id] %>
 	 <div style="float: left; width: auto;">

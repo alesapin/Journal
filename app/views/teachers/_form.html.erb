@@ -10,39 +10,54 @@
       </ul>
     </div>
   <% end %>
+<%if @teacher.new_record? %>
+
+<div class="row">
+  <div class="col-sm-6">
   <div class="field">
-  	<%= f.label :login %>
-	<%= f.text_field :login %>
+  <h3>Логин</h3>
+	<%= f.text_field :login ,:class=>"form-control"%>
   </div>
   <div class="field">
-  	<%= f.label :password %>
-	<%= f.password_field :password, size: 40 %>
+  <h3>Пароль</h3>
+	<%= f.password_field :password, size: 40,:class=>"form-control" %>
   </div>
   <div>
-	<%= f.label :password_confiramtion %>
-    <%= f.password_field :password_confirmation, size: 40 %>
+  <h3>Подтвердите пароль</h3>
+    <%= f.password_field :password_confirmation, size: 40 ,:class=>"form-control"%>
+  </div>
+  <% end %>
+  <div class="field">
+    <h3>Имя</h3>
+    <%= f.text_field :name, :class => "form-control"%>
   </div>
   <div class="field">
-    <%= f.label :name %><br>
-    <%= f.text_field :name %>
+    <h3>Отчество</h3>
+    <%= f.text_field :patronymic, :class=>"form-control" %>
   </div>
   <div class="field">
-    <%= f.label :patronymic %><br>
-    <%= f.text_field :patronymic %>
+    <h3>Фамилия</h3>
+    <%= f.text_field :surname, :class=>"form-control" %>
   </div>
   <div class="field">
-    <%= f.label :surname %><br>
-    <%= f.text_field :surname %>
+    <h3>Научная степень</h3>
+    <%= f.text_field :degree, :class=>"form-control" %>
   </div>
   <div class="field">
-    <%= f.label :degree %><br>
-    <%= f.text_field :degree %>
+    <h3>Ссылка на изображение</h3>
+	<%= f.text_field :img,:class=>"form-control" %>
   </div>
-  <div class="field">
-	<%= f.label :img %><br>
-	<%= f.text_field :img %>
+  <br>
+  <%if @teacher.new_record? %>
+    <div class="actions">
+      <%= f.submit "Создать",:class => "btn btn-warning"%>
+    </div>
+  <%else%>
+    <div class="actions">
+      <%= f.submit "Изменить",:class => "btn btn-warning"%>
+    </div>
+  <%end%>
   </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+</div>
+</div>
 <% end %>

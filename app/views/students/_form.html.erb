@@ -10,20 +10,31 @@
       </ul>
     </div>
   <% end %>
-
+<div class="row">
+  <div class="col-sm-6">
   <div class="field">
-    <%= f.label :name %><br>
-    <%= f.text_field :name %>
-  </div>
-  <div class="field">
-    <%= f.label :surname %><br>
-    <%= f.text_field :surname %>
+    <h3>Имя</h3>
+    <%= f.text_field :name,:class => "form-control" %>
   </div>
   <div class="field">
-    <%= f.label :group %><br>
-    <%= f.collection_select :group_id, Group.all, :id, :name, include_blank: true %>
+    <h3>Фамилия</h3>
+    <%= f.text_field :surname,:class => "form-control"%>
   </div>
-  <div class="actions">
-    <%= f.submit %>
+  <div class="field">
+    <h3>Группа</h3><br>
+    <%= f.collection_select :group_id, Group.all, :id, :name, {include_blank: true},{:class=>"form-control" }%>
   </div>
+  <br>
+  <%if @student.new_record? %>
+    <div class="actions">
+      <%= f.submit "Создать",:class => "btn btn-warning"%>
+    </div>
+  <%else%>
+    <div class="actions">
+      <%= f.submit "Изменить",:class => "btn btn-warning"%>
+    </div>
+  <%end%>
+  </div>
+</div>
+</div>
 <% end %>

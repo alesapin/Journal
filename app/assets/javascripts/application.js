@@ -15,3 +15,7 @@
 //= require turbolinks
 //= require_tree .
 //= require bootstrap.min
+//= require highcharts
+//= require highcharts/highcharts-more
+//= require rowlink
+//= require bootstrap-select.min
